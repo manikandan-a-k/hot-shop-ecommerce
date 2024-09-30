@@ -44,9 +44,11 @@ const Verify = () => {
   useEffect(() => {
     verifyPayment();
   }, [token, success, orderId]);
-  return <div>
-    payment verification
-  </div>;
+  return (
+    <div>
+      <p>Payment Verification</p>
+    </div>
+  );
 };
 
 export default Verify;
