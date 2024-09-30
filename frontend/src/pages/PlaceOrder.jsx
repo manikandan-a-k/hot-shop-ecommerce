@@ -169,6 +169,7 @@ const PlaceOrder = () => {
               {
                 headers: {
                   token,
+                  origin: window.location.origin
                 },
               }
             );
@@ -183,7 +184,6 @@ const PlaceOrder = () => {
             break;
         }
       } catch (error) {
-        
         toast.error(error.message);
       }
     }
