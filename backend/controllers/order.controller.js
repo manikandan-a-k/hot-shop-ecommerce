@@ -44,6 +44,7 @@ const placeOrderStripe = async (req, res) => {
     const userId = req.userId;
     const { items, amount, address } = req.body;
     const { origin } = req.headers;
+    console.log(origin)
     const orderData = {
       userId,
       items,
