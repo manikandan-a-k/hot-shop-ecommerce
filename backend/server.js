@@ -12,34 +12,9 @@ import { ENV_VARS } from "./config/env.vars.js";
 const app = express();
 app.use(express.json());
 
-// Manually add CORS headers
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // Allow all origins
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  if (req.method === 'OPTIONS') {
-    return res.status(200).json({});
-  }
-  next();
-});
-
-// CORS configuration with origins and credentials
-const allowedOrigins = [
-  "https://hot-shop-ecommerce.vercel.app",
-  "https://hot-shop-admin.vercel.app"
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow credentials like cookies, authorization headers
-    optionsSuccessStatus: 200 // Compatibility with older browsers
+    credentials: true,
   })
 );
 
