@@ -8,7 +8,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const Cart = () => {
-  const { products, currency, cartItems, updateCart, backendUrl, token } =
+  const { products, currency, cartItems, updateCart, token } =
     useContext(ShopContext);
   
   const [cartData, setCartData] = useState([]);

@@ -63,7 +63,7 @@ const SignUp = () => {
     setError(error);
     return isValid;
   };
-  const { backendUrl, token, setToken } = useContext(ShopContext);
+  const {  token, setToken } = useContext(ShopContext);
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
@@ -73,7 +73,7 @@ const SignUp = () => {
     if (isValid) {
       try {
         const response = await axios.post(
-          `${backendUrl}/api/auth/signup`,
+          `/api/auth/signup`,
           formData
         );
         if (response.data.success) {

@@ -11,7 +11,6 @@ const PlaceOrder = () => {
   const [payment, setPayment] = useState("cod");
   const navigate = useNavigate();
   const {
-    backendUrl,
     token,
     cartItems,
     setCartItems,
@@ -148,7 +147,7 @@ const PlaceOrder = () => {
           //API Calls For  COD
           case "cod":
             const response = await axios.post(
-              `${backendUrl}/api/order/${payment}`,
+              `/api/order/${payment}`,
               orderData,
               { headers: { token } }
             );

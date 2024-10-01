@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { backendUrl, currecy } from "../App";
+import {  currecy } from "../App";
 import { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ const Orders = ({ token }) => {
       return null;
     }
     try {
-      const response = await axios.get(`${backendUrl}/api/order/allorders`, {
+      const response = await axios.get(`/api/order/allorders`, {
         headers: { token },
       });
       if (response.data.success) {
@@ -27,7 +27,7 @@ const Orders = ({ token }) => {
   const statusHandler = async (event, orderId) => {
     try {
       const response = await axios.post(
-        `${backendUrl}/api/order/status`,
+        `/api/order/status`,
         {
           orderId,
           status: event.target.value,

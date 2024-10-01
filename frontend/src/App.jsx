@@ -16,6 +16,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SignUp from "./pages/SignUp";
 import Verify from "./pages/Verify";
+import axios from "axios"
+axios.defaults.withCredentials=true
+axios.defaults.baseURL="https://hot-shop-backend.vercel.app"
 
 const App = () => {
   return (

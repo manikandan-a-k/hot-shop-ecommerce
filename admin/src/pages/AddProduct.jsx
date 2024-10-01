@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { assets } from "../assets/admin_assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { backendUrl } from "../App";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const AddProduct = ({ token }) => {
   const [productDetails, setProductDetails] = useState({
@@ -111,7 +110,7 @@ const AddProduct = ({ token }) => {
         });
 
         const response = await axios.post(
-          `${backendUrl}/api/product/add`,
+          `/api/product/add`,
           formData,
           {
             headers: {

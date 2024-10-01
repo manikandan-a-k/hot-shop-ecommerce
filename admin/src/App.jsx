@@ -11,8 +11,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import Home from "./pages/Home";
-//Backend URL
-export const backendUrl = import.meta.env.VITE_BACKEND_URL;
+axios.defaults.withCredentials=true
+axios.defaults.baseURL="https://hot-shop-backend.vercel.app"
 //Currency
 export const currecy="₹"
 

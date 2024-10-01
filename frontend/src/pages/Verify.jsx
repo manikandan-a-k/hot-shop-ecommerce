@@ -5,7 +5,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 const Verify = () => {
   const {
-    backendUrl,
     token,
     cartItems,
     setCartItems,
@@ -25,7 +24,7 @@ const Verify = () => {
         return null;
       }
       const response = await axios.post(
-        `${backendUrl}/api/order/verifyStripe`,
+        `/api/order/verifyStripe`,
         { success, orderId },
         { headers: { token } }
       );

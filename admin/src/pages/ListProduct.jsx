@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { backendUrl, currecy } from "../App";
+
 import { RxCross2 } from "react-icons/rx";
 import { toast } from "react-toastify";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -13,7 +13,7 @@ const ListProduct = ({ token }) => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${backendUrl}/api/product/list`);
+      const response = await axios.get(`/api/product/list`);
       setLoading(false);
 
       if (response.data.success) {
@@ -29,7 +29,7 @@ const ListProduct = ({ token }) => {
   const removeProduct = async (id) => {
     try {
       const response = await axios.delete(
-        `${backendUrl}/api/product/remove/${id}`,
+        `/api/product/remove/${id}`,
         { headers: { token } }
       );
       if (response.data.success) {

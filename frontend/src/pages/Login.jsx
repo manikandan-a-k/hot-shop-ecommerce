@@ -19,7 +19,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { token, setToken, backendUrl } = useContext(ShopContext);
+  const { token, setToken } = useContext(ShopContext);
   const navigate = useNavigate();
 
   const handleFormData = (e) => {
@@ -58,7 +58,7 @@ const Login = () => {
       try {
         setLoading(true);
         const response = await axios.post(
-          `${backendUrl}/api/auth/login`,
+          `/api/auth/login`,
           formData
         );
         if (response.data.success) {

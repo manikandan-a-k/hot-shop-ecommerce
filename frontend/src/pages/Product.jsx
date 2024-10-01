@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Product = () => {
   const { productId } = useParams();
-  const { currency, addToCart, backendUrl } = useContext(ShopContext);
+  const { currency, addToCart } = useContext(ShopContext);
   const [productData, setProductData] = useState(null);
   const [image, setImage] = useState("");
   const [size, setSize] = useState("");
@@ -17,7 +17,7 @@ const Product = () => {
   const fetchProductData = async () => {
     try {
       const response = await axios.get(
-        `${backendUrl}/api/product/single/${productId}`
+        `/api/product/single/${productId}`
       );
       if (response.data.success) {
         setProductData(response.data.productData); // Change to set object instead of array

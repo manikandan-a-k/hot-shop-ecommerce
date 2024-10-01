@@ -6,7 +6,7 @@ export const ShopContext = createContext();
 const ShopContextProvider = ({ children }) => {
   const currency = "₹";
   const delivery_fee = 50;
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  
   const [token, setToken] = useState("");
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
@@ -17,7 +17,7 @@ const ShopContextProvider = ({ children }) => {
   const addToCart = async (itemId, size) => {
     try {
       const response = await axios.post(
-        `${backendUrl}/api/cart/add`,
+        `/api/cart/add`,
         { itemId, size },
         { headers: { token } }
       );
@@ -35,7 +35,7 @@ const ShopContextProvider = ({ children }) => {
   //User Cart Data
   const getCartData = async () => {
     try {
-      const response = await axios.get(`${backendUrl}/api/cart/get`, {
+      const response = await axios.get(`/api/cart/get`, {
         headers: { token },
       });
       if (response.data.success) {
@@ -64,7 +64,7 @@ const ShopContextProvider = ({ children }) => {
   const updateCart = async (itemId, size, quantity) => {
     try {
       const response = await axios.post(
-        `${backendUrl}/api/cart/update`,
+        `/api/cart/update`,
         { itemId, size, quantity },
         { headers: { token } }
       );
@@ -91,7 +91,7 @@ const ShopContextProvider = ({ children }) => {
   //Get Product From Database
   const getProducts = async () => {
     try {
-      const response = await axios.get(`${backendUrl}/api/product/list`);
+      const response = await axios.get(`/api/product/list`);
 
       if (response.data.success) {
         setProducts(response.data.productsData);
@@ -103,7 +103,7 @@ const ShopContextProvider = ({ children }) => {
   //Get User Orders
   const getUserOrders = async () => {
     try {
-      const response = await axios.get(`${backendUrl}/api/order/userorders`, {
+      const response = await axios.get(`/api/order/userorders`, {
         headers: { token },
       });
       console.log(response.data);
@@ -147,7 +147,6 @@ const ShopContextProvider = ({ children }) => {
     products,
     currency,
     delivery_fee,
-    backendUrl,
     token,
     setToken,
     search,

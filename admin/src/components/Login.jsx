@@ -3,7 +3,6 @@ import { VscEye } from "react-icons/vsc";
 import { VscEyeClosed } from "react-icons/vsc";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { backendUrl } from "../App";
 import {useNavigate} from "react-router-dom"
 
 const Login = ({setToken}) => {
@@ -50,7 +49,7 @@ const Login = ({setToken}) => {
     if (isValid) {
       try {
         const response = await axios.post(
-          backendUrl + "/api/auth/admin",
+         "/api/auth/admin",
           formData
         );
         console.log(response.data)
