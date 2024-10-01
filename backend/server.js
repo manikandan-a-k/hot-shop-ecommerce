@@ -14,8 +14,8 @@ app.use(express.json());
 
 // Allowed origins
 const allowedOrigins = [
-  "https://hot-shop-ecommerce.vercel.app/",
-  "https://hot-shop-admin.vercel.app/"
+  "https://hot-shop-ecommerce.vercel.app",
+  "https://hot-shop-admin.vercel.app"
 ];
 
 // CORS configuration
