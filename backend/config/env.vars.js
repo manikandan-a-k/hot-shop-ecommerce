@@ -3,8 +3,6 @@ dotenv.config();
 
 export const ENV_VARS = {
   PORT: process.env.PORT,
-  FRONTEND_URL: process.env.FRONTEND_URL,
-  ADMIN_URL: process.env.ADMIN_URL,
   MONGODB_URL: process.env.MONGODB_URL,
   JWT_SECRETKEY: process.env.JWT_SECRETKEY,
   CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
