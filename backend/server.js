@@ -12,26 +12,11 @@ import { ENV_VARS } from "./config/env.vars.js";
 const app = express();
 app.use(express.json());
 
-// Allowed origins
-const allowedOrigins = [
-  "https://hot-shop-ecommerce.vercel.app",
-  "https://hot-shop-admin.vercel.app"
-];
+
 
 // CORS configuration
 app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow cookies and authorization headers
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
-  })
+  cors()
 );
 
 // API Endpoints
