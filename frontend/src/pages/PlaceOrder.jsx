@@ -331,32 +331,8 @@ const PlaceOrder = () => {
           </div>
           {/* Payment Method */}
           <div className="flex gap-3 flex-col sm:flex-row">
-            <div
-              onClick={() => setPayment("razorpay")}
-              className="flex items-center gap-3 border p-2 px-3 cursor-pointer"
-            >
-              <p
-                className={`min-w-3.5 h-3.5 border border-gray-600 rounded-full ${
-                  payment === "razorpay" ? "bg-green-500" : ""
-                }`}
-              ></p>
-              <img
-                src={assets.razorpay_logo}
-                alt="Razorpay"
-                className="h-5 mx-4"
-              />
-            </div>
-            <div
-              onClick={() => setPayment("stripe")}
-              className="flex items-center gap-3 border p-2 px-3 cursor-pointer"
-            >
-              <p
-                className={`min-w-3.5 h-3.5 border rounded-full border-gray-600 ${
-                  payment === "stripe" ? "bg-green-500" : ""
-                }`}
-              ></p>
-              <img src={assets.stripe_logo} alt="Stripe" className="h-5 mx-4" />
-            </div>
+            
+            
             <div
               onClick={() => setPayment("cod")}
               className="flex items-center gap-3 border p-2 px-3 cursor-pointer"
