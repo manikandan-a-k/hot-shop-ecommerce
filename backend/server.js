@@ -11,7 +11,7 @@ import { ENV_VARS } from "./config/env.vars.js";
 // App Config
 const app = express();
 app.use(express.json());
-const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+const allowedOrigins = ["https://hot-shop-ecommerce.onrender.com", "https://hot-shop-admin.onrender.com"];
 app.use(
   cors({
     origin: (origin, callback) => {
