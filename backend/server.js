@@ -11,9 +11,7 @@ import orderRouter from "./routes/order.route.js";
 const app = express();
 app.use(express.json());
 app.use(
-  cors({
-    credentials: true,
-  })
+  cors()
 );
 
 //api end points
