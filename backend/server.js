@@ -10,7 +10,7 @@ import orderRouter from "./routes/order.route.js";
 //App Config
 const app = express();
 app.use(express.json());
-const allowedOrigins = [ENV_VARS.FRONTEND_URL, ENV_VARS.ADMIN_URL];
+const allowedOrigins = ["https://hot-shop-ecommerce.vercel.app","https://hot-shop-admin.vercel.app"];
 
 app.use(
   cors({
