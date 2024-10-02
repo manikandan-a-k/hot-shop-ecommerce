@@ -11,7 +11,7 @@ import { ENV_VARS } from "./config/env.vars.js";
 // App Config
 const app = express();
 app.use(express.json());
-const allowedOrigins = ["https://hot-shop-ecommerce.vercel.app", "https://hot-shop-admin.vercel.app"];
+const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
 app.use(
   cors({
     origin: (origin, callback) => {

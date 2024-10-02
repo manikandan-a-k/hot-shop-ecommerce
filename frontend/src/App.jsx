@@ -18,7 +18,7 @@ import SignUp from "./pages/SignUp";
 import Verify from "./pages/Verify";
 import axios from "axios"
 axios.defaults.withCredentials=true
-axios.defaults.baseURL="https://hot-shop-backend.vercel.app"
+axios.defaults.baseURL="http://localhost:3000"
 
 const App = () => {
   return (

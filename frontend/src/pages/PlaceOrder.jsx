@@ -163,7 +163,7 @@ const PlaceOrder = () => {
           //API Call For Stripe
           case "stripe":
             const responseStripe = await axios.post(
-              `${backendUrl}/api/order/stripe`,
+              `/api/order/stripe`,
               orderData,
               {
                 headers: {
@@ -344,6 +344,18 @@ const PlaceOrder = () => {
               <p className="mx-4 text-sm font-medium text-gray-500">
                 CASH ON DELIVERY
               </p>
+            </div>
+            <div
+              onClick={() => setPayment("stripe")}
+              className="flex items-center gap-3 border p-2 px-3 cursor-pointer"
+            >
+              <p
+                className={`min-w-3.5 h-3.5 border rounded-full border-gray-600 ${
+                  payment === "stripe" ? "bg-green-500" : ""
+                }`}
+              ></p>
+              <img src={assets.stripe_logo} alt="" className="w-12"/>
+             
             </div>
           </div>
         </div>

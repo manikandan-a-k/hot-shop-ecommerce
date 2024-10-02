@@ -1,19 +1,21 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 export const ShopContext = createContext();
 
 const ShopContextProvider = ({ children }) => {
   const currency = "₹";
   const delivery_fee = 50;
-  
+
   const [token, setToken] = useState("");
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [cartItems, setCartItems] = useState({});
   const [userOrders, setUserOrders] = useState([]);
-  //Add To Cart
+
+  // Add To Cart
   const addToCart = async (itemId, size) => {
     try {
       const response = await axios.post(
@@ -23,7 +25,7 @@ const ShopContextProvider = ({ children }) => {
       );
       if (response.data.success) {
         toast.success(response.data.message);
-        getCartData();
+        await getCartData();
       } else {
         toast.error(response.data.message);
       }
@@ -32,7 +34,8 @@ const ShopContextProvider = ({ children }) => {
       toast.error(error.message);
     }
   };
-  //User Cart Data
+
+  // User Cart Data
   const getCartData = async () => {
     try {
       const response = await axios.get(`/api/cart/get`, {
@@ -48,7 +51,8 @@ const ShopContextProvider = ({ children }) => {
       toast.error(error.message);
     }
   };
-  //User Cart Count
+
+  // User Cart Count
   const getCartCount = () => {
     let totalCount = 0;
     for (const items in cartItems) {
@@ -60,7 +64,8 @@ const ShopContextProvider = ({ children }) => {
     }
     return totalCount;
   };
-  //Update Cart
+
+  // Update Cart
   const updateCart = async (itemId, size, quantity) => {
     try {
       const response = await axios.post(
@@ -69,44 +74,53 @@ const ShopContextProvider = ({ children }) => {
         { headers: { token } }
       );
       if (response.data.success) {
-        getCartData();
+        await getCartData();
+      } else {
+        toast.error(response.data.message);
       }
     } catch (error) {
-      toast.error(error.response);
+      console.log(error);
+      toast.error(error.response?.data?.message || "Failed to update cart");
     }
   };
-  //Get Cart Total Amount
+
+  // Get Cart Total Amount
   const getCartTotalAmount = async () => {
     let totalAmount = 0;
     for (const items in cartItems) {
       const productInfo = products.find((product) => product._id === items);
-      for (const item in cartItems[items]) {
-        if (cartItems[items][item] > 0) {
-          totalAmount += productInfo.price * cartItems[items][item];
+      if (productInfo) {
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            totalAmount += productInfo.price * cartItems[items][item];
+          }
         }
       }
     }
     return totalAmount;
   };
-  //Get Product From Database
+
+  // Get Product From Database
   const getProducts = async () => {
     try {
       const response = await axios.get(`/api/product/list`);
-
       if (response.data.success) {
         setProducts(response.data.productsData);
+      } else {
+        toast.error(response.data.message);
       }
     } catch (error) {
       console.log(error);
+      toast.error("Failed to fetch products");
     }
   };
-  //Get User Orders
+
+  // Get User Orders
   const getUserOrders = async () => {
     try {
       const response = await axios.get(`/api/order/userorders`, {
         headers: { token },
       });
-      console.log(response.data);
       if (response.data.success) {
         let allOrdersItems = [];
         response.data.ordersData.forEach((order) => {
@@ -121,28 +135,42 @@ const ShopContextProvider = ({ children }) => {
           });
         });
         setUserOrders(allOrdersItems.reverse());
+      } else {
+        toast.error(response.data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to fetch orders");
+    }
   };
 
+  
   useEffect(() => {
     getProducts();
   }, []);
+
+  
   useEffect(() => {
-    if (!token && localStorage.getItem("token")) {
-      setToken(localStorage.getItem("token"));
+    const storedToken = localStorage.getItem("token");
+    if (!token && storedToken) {
+      setToken(storedToken);
     }
-  }, [token]);
+  }, []); 
+
+  
   useEffect(() => {
     if (token) {
       getCartData();
     }
   }, [token]);
+
+  
   useEffect(() => {
     if (token) {
       getUserOrders();
     }
   }, [token]);
+
   const value = {
     products,
     currency,

@@ -1,78 +1,75 @@
 import React, { useState } from "react";
-import { VscEye } from "react-icons/vsc";
-import { VscEyeClosed } from "react-icons/vsc";
+import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import axios from "axios";
 import { toast } from "react-toastify";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-const Login = ({setToken}) => {
+const Login = ({ setToken }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const [error, setError] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate=useNavigate()
+  const [error, setError] = useState({});
+  const navigate = useNavigate();
 
-  //Form Validation
+  // Form validation logic
   const handleFormValidation = () => {
     let isValid = true;
-    const error = {};
+    const errors = {};
     const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
     if (!formData.email) {
       isValid = false;
-      error.email = "Email field is required";
+      errors.email = "Email field is required";
     } else if (!validEmail.test(formData.email)) {
       isValid = false;
-      error.email = "Invalid email";
+      errors.email = "Invalid email";
     }
+
     if (!formData.password) {
       isValid = false;
-      error.password = "Password field is required";
+      errors.password = "Password field is required";
     }
-    setError(error);
+
+    setError(errors);
     return isValid;
   };
-  //Form Data
+
+  // Form input handler
   const handleFormData = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  //Admin Login
+  // Admin login handler
   const handleLogin = async (e) => {
     e.preventDefault();
     const isValid = handleFormValidation();
+
     if (isValid) {
       try {
-        const response = await axios.post(
-         "/api/auth/admin",
-          formData
-        );
-        console.log(response.data)
-        if(response.data.success)
-        {
-          setToken(response.data.token)
-          navigate("/")
-          toast.success("Welcome back")
-        }
-        else{
-            toast.error(response.data.message)
+        const { data } = await axios.post("/api/auth/admin", formData);
+
+        if (data.success) {
+          setToken(data.token);
+          localStorage.setItem("token", data.token);
+          navigate("/");
+          toast.success("Welcome back");
+        } else {
+          toast.error(data.message);
         }
       } catch (error) {
-       
-        toast.error(error.response.data.message)
+        toast.error(error.response?.data?.message || "Login failed");
       }
     }
   };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <form
         onSubmit={handleLogin}
-        className="w-full max-w-80 md:max-w-sm mx-auto flex flex-col  shadow-md px-6 py-10 bg-white rounded-lg  gap-6"
+        className="w-full max-w-80 md:max-w-sm mx-auto flex flex-col shadow-md px-6 py-10 bg-white rounded-lg gap-6"
       >
         <div>
           <h1 className="font-bold text-center pacifico-regular text-2xl md:text-4xl">
@@ -99,6 +96,7 @@ const Login = ({setToken}) => {
               <p className="text-xs mt-1 text-red-500">{error.email}</p>
             )}
           </div>
+
           <div>
             <p className="text-sm font-medium text-gray-700 mb-2">Password</p>
             <div className="relative flex items-center">
@@ -112,7 +110,7 @@ const Login = ({setToken}) => {
               />
               <div
                 onClick={() => setPasswordVisible(!passwordVisible)}
-                className="absolute cursor-pointer right-2 "
+                className="absolute cursor-pointer right-2"
               >
                 {passwordVisible ? <VscEye /> : <VscEyeClosed />}
               </div>
