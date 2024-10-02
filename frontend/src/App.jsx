@@ -18,7 +18,7 @@ import SignUp from "./pages/SignUp";
 import Verify from "./pages/Verify";
 import axios from "axios"
 axios.defaults.withCredentials=true
-axios.defaults.baseURL="http://localhost:3000"
+axios.defaults.baseURL="https://hot-shop-backend.onrender.com"
 
 const App = () => {
   return (

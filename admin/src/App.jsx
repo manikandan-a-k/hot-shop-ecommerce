@@ -13,7 +13,7 @@ import Home from "./pages/Home";
 
 // Global Axios settings
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://hot-shop-backend.onrender.com";
 
 // Currency constant
 export  const currency = "₹";
